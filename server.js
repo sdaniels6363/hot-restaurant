@@ -15,7 +15,7 @@ app.use(express.json());
 // variables for reserved tables and waitlist
 // =============================================================
 var waitlist = [];
-var reserved = []; 
+var tables = []; 
 
 // Routes
 // =============================================================
@@ -33,8 +33,6 @@ app.get("/tables", function(req, res) {
   res.sendFile(path.join(__dirname, "tables.html"));
 });
 
-
-
 // Displays a single character, or returns false
 app.get("/api/:userInput", function(req, res) {
   var chosen = req.params.userInput;
@@ -43,20 +41,13 @@ app.get("/api/:userInput", function(req, res) {
 
   switch (chosen){
     case "waitlist":
-      break;
+      return res.json(waitlist);
     case "tables":
-      break;  
+        return res.json(tables);
+    default:
+      return res.send("Page not found.")
   }
 
-
-
-  // for (var i = 0; i < characters.length; i++) {
-  //   if (chosen === characters[i].routeName) {
-  //     return res.json(characters[i]);
-  //   }
-  // }
-
-  return res.json(false);
 });
 
 // Create New Characters - takes in JSON input
