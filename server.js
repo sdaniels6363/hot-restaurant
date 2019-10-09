@@ -15,43 +15,46 @@ app.use(express.json());
 // variables for reserved tables and waitlist
 // =============================================================
 var waitlist = [];
-var tables = []; 
+var tables = [];
 
 // Routes
 // =============================================================
 
 // Basic route that sends the user first to the AJAX Page
-app.get("/", function(req, res) {
+app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.get("/add", function(req, res) {
+app.get("/add", function (req, res) {
   res.sendFile(path.join(__dirname, "add.html"));
 });
 
-app.get("/tables", function(req, res) {
+app.get("/tables", function (req, res) {
   res.sendFile(path.join(__dirname, "tables.html"));
 });
 
-// Displays a single character, or returns false
-app.get("/api/:userInput", function(req, res) {
+// takes whatever is after /api/* and based on the value it performs a certain function
+app.get("/api/:userInput", function (req, res) {
   var chosen = req.params.userInput;
 
   console.log(chosen);
 
-  switch (chosen){
+  switch (chosen) {
     case "waitlist":
+      // send back json version of the waitlist array
       return res.json(waitlist);
     case "tables":
-        return res.json(tables);
+      // send back json version of the tables array
+      return res.json(tables);
     default:
+      // reply on 0 case matches
       return res.send("Page not found.")
   }
 
 });
 
 // Create New Characters - takes in JSON input
-app.post("/api/characters", function(req, res) {
+app.post("/api/characters", function (req, res) {
   // req.body hosts is equal to the JSON post sent from the user
   // This works because of our body parsing middleware
   var newCharacter = req.body;
@@ -72,6 +75,6 @@ app.post("/api/characters", function(req, res) {
 
 // Starts the server to begin listening
 // =============================================================
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log("App listening on PORT " + PORT);
 });
