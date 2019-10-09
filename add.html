@@ -62,21 +62,21 @@
   </div>
 
   <script type="text/javascript">
-    // Question: What does this code do?
+    // Gathers the data to then be sent to server with the .post below
     $("#add-btn").on("click", function(event) {
       event.preventDefault();
-      var newCharacter = {
+      var newTable = {
         name: $("#name").val().trim(),
-        role: $("#role").val().trim(),
-        age: $("#age").val().trim(),
-        forcePoints: $("#force-points").val().trim()
+        email: $("#email").val().trim(),
+        phone: $("#phone").val().trim(),
+        originalID: $("#origID").val().trim()
       };
 
-      // Question: What does this code do??
-      $.post("/api/characters", newCharacter)
+      // This sends the form data to the server
+      $.post("/api/tables", newTable)
         .then(function(data) {
           console.log("add.html", data);
-          alert("Adding character...");
+          alert("Adding table...");
         });
     });
   </script>
