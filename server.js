@@ -34,7 +34,7 @@ app.get("/tables", function (req, res) {
 });
 
 // takes whatever is after /api/* and based on the value it performs a certain function
-app.get("/api/:userInput", function (req, res) {
+app.get("/api/show/:userInput", function (req, res) {
   var chosen = req.params.userInput;
 
   console.log(chosen);
@@ -53,24 +53,17 @@ app.get("/api/:userInput", function (req, res) {
 
 });
 
-// Create New Characters - takes in JSON input
-app.post("/api/characters", function (req, res) {
+// Create New Table - takes in JSON input
+app.post("/api/add/tables", function (req, res) {
   // req.body hosts is equal to the JSON post sent from the user
   // This works because of our body parsing middleware
-  var newCharacter = req.body;
+  var newTable = req.body;
 
-  // Using a RegEx Pattern to remove spaces from newCharacter
-  // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-  newCharacter.routeName = newCharacter.name.replace(/\s+/g, "").toLowerCase();
+  // add the user's json to the tables array
+  tables.push(newTable);
 
-  newCharacter.age = parseInt(newCharacter.age);
-  newCharacter.forcePoints = parseInt(newCharacter.forcePoints);
-
-  console.log(newCharacter);
-
-  characters.push(newCharacter);
-
-  res.json(newCharacter);
+  // displays
+  res.send(`new table added ${newTable}`);
 });
 
 // Starts the server to begin listening
