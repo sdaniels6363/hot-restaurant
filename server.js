@@ -59,11 +59,23 @@ app.post("/api/add/tables", function (req, res) {
   // This works because of our body parsing middleware
   var newTable = req.body;
 
-  // add the user's json to the tables array
-  tables.push(newTable);
+  if (tables.length >= 5) {
+    console.log("go to waitlist")
+    // if 5 or more, add to waitlist array
+    waitlist.push(newTable);
+  } else {
+    console.log("go to tables")
+
+    // add the user's json to the tables array
+    tables.push(newTable);
+  }
+
+  res.send("Table added");
+
 
   // displays
-  res.send(`new table added ${newTable}`);
+  // console.log("should redirect");
+  // res.redirect("/tables");
 });
 
 // Starts the server to begin listening
