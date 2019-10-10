@@ -75,6 +75,8 @@
       // This sends the form data to the server
       $.post("/api/add/tables", newTable)
         .then(function(data) {
+          // redirects to tables page after posting data
+          window.location.href = "http://localhost:3000/tables"; 
           console.log("add.html", data);
         });
     });

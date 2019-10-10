@@ -70,12 +70,9 @@ app.post("/api/add/tables", function (req, res) {
     tables.push(newTable);
   }
 
-  res.send("Table added");
+  //send successful http response code
+  res.sendStatus(200);;
 
-
-  // displays
-  // console.log("should redirect");
-  // res.redirect("/tables");
 });
 
 // Starts the server to begin listening
